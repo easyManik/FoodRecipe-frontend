@@ -1,0 +1,42 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": [
+    {
+      "id": 1,
+      "name": "easy"
+    }
+  ],
+  "add_recipe": [
+    {
+      "id": 1,
+      "photo": null,
+      "title": "burger",
+      "ingredients": "roti, sambal, daging, sayur",
+      "video": null
+    },
+    {
+      "id": 2
+    }
+  ],
+  "login": [
+    {
+      "id": 1,
+      "email": "easy@gmail.com",
+      "password": "123456"
+    }
+  ],
+  "recipes": []
+}
