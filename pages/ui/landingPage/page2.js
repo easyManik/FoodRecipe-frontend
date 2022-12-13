@@ -20,7 +20,7 @@ const Page2 = () => {
           <Image className="mx-4 " src={Assets.pizza} alt="" style={css} />
         </div>
 
-        <div>
+        <div className="col-sm-6 px-5">
           <h1>Healthy Bone Broth Ramen (Quick & Easy)</h1>
           <hr style={{ width: "100px" }} />
           <p>

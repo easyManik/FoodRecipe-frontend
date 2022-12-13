@@ -3,6 +3,8 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Image from "next/image";
 
+const css = { maxWidth: "100%", height: "auto", minWidth: "30%" };
+
 function NavTabs() {
   const [key, setKey] = useState("myrecipe");
   return (
@@ -17,7 +19,13 @@ function NavTabs() {
           <Tab eventKey="myrecipe" title="My Recipe">
             <div className="row">
               <div className="col-3">
-                <Image src="/pizza.png" height={300} width={300} alt="" />
+                <Image
+                  src="/pizza.png"
+                  height={300}
+                  width={300}
+                  alt=""
+                  style={css}
+                />
                 <h4
                   style={{
                     marginTop: "-40px",
@@ -25,11 +33,17 @@ function NavTabs() {
                     color: "white",
                   }}
                 >
-                  Indian Salad
+                  Pizza
                 </h4>
               </div>
               <div className="col-3">
-                <Image src="/pizza.png" height={300} width={300} alt="" />
+                <Image
+                  style={css}
+                  src="/pizza.png"
+                  height={300}
+                  width={300}
+                  alt=""
+                />
                 <h4
                   style={{
                     marginTop: "-40px",
@@ -37,11 +51,17 @@ function NavTabs() {
                     color: "white",
                   }}
                 >
-                  Indian Salad
+                  Pizza
                 </h4>
               </div>
               <div className="col-3">
-                <Image src="/pizza.png" height={300} width={300} alt="" />
+                <Image
+                  src="/pizza.png"
+                  height={300}
+                  width={300}
+                  alt=""
+                  style={css}
+                />
                 <h4
                   style={{
                     marginTop: "-40px",
@@ -49,7 +69,7 @@ function NavTabs() {
                     color: "white",
                   }}
                 >
-                  Indian Salad
+                  Pizza
                 </h4>
               </div>
             </div>
@@ -57,7 +77,13 @@ function NavTabs() {
           <Tab eventKey="savedrecipe" title="Saved Recipe">
             <div className="row">
               <div className="col-3">
-                <Image src="/pizza.png" height={300} width={300} alt="" />
+                <Image
+                  src="/pizza.png"
+                  height={300}
+                  width={300}
+                  alt=""
+                  style={css}
+                />
                 <h4
                   style={{
                     marginTop: "-40px",
@@ -65,11 +91,17 @@ function NavTabs() {
                     color: "white",
                   }}
                 >
-                  Indian Salad
+                  Pizza
                 </h4>
               </div>
               <div className="col-3">
-                <Image src="/pizza.png" height={300} width={300} alt="" />
+                <Image
+                  src="/pizza.png"
+                  height={300}
+                  width={300}
+                  alt=""
+                  style={css}
+                />
                 <h4
                   style={{
                     marginTop: "-40px",
@@ -77,11 +109,17 @@ function NavTabs() {
                     color: "white",
                   }}
                 >
-                  Indian Salad
+                  Pizza
                 </h4>
               </div>
               <div className="col-3">
-                <Image src="/pizza.png" height={300} width={300} alt="" />
+                <Image
+                  style={css}
+                  src="/pizza.png"
+                  height={300}
+                  width={300}
+                  alt=""
+                />
                 <h4
                   style={{
                     marginTop: "-40px",
@@ -89,7 +127,7 @@ function NavTabs() {
                     color: "white",
                   }}
                 >
-                  Indian Salad
+                  Pizza
                 </h4>
               </div>
             </div>
@@ -97,7 +135,13 @@ function NavTabs() {
           <Tab eventKey="likedrecipe" title="Liked Recipe">
             <div className="row">
               <div className="col-3">
-                <Image src="/pizza.png" height={300} width={300} alt="" />
+                <Image
+                  style={css}
+                  src="/pizza.png"
+                  height={300}
+                  width={300}
+                  alt=""
+                />
                 <h4
                   style={{
                     marginTop: "-40px",
@@ -105,11 +149,17 @@ function NavTabs() {
                     color: "white",
                   }}
                 >
-                  Indian Salad
+                  Pizza
                 </h4>
               </div>
               <div className="col-3">
-                <Image src="/pizza.png" height={300} width={300} alt="" />
+                <Image
+                  style={css}
+                  src="/pizza.png"
+                  height={300}
+                  width={300}
+                  alt=""
+                />
                 <h4
                   style={{
                     marginTop: "-40px",
@@ -117,19 +167,25 @@ function NavTabs() {
                     color: "white",
                   }}
                 >
-                  Indian Salad
+                  Pizza
                 </h4>
               </div>
               <div className="col-3">
-                <Image src="/pizza.png" height={300} width={300} alt="" />
+                <Image
+                  style={css}
+                  src="/pizza.png"
+                  height={300}
+                  width={300}
+                  alt=""
+                />
                 <h4
                   style={{
                     marginTop: "-40px",
                     marginLeft: "13px",
-                    color: "white",
+                    color: "black",
                   }}
                 >
-                  Indian Salad
+                  Pizza
                 </h4>
               </div>
             </div>

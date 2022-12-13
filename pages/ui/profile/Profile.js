@@ -1,26 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Footer } from "../../../components/footer";
-import { Layouts } from "../../../components/layouts";
+import { Layouts2 } from "../../../components/layouts/Layout2";
 import Assets from "./../../../public/index";
 import Image from "next/image";
-import Tabs from "./../../../components/profile/Tabs";
+import axios from "axios";
 import NavTabs from "./../../../components/profile/Tabs";
+import { getCookies } from "cookies-next";
 
-export async function getStaticProps() {
-  const res = await fetch("http://localhost:3000/profile");
-  const data = await res.json();
-  return {
-    props: {
-      data,
-    },
-  };
-}
+// export async function getStaticProps() {
+//   const res = await fetch("http://localhost:3000/users/");
+//   const data = await res.json();
+//   return {
+//     props: {
+//       data,
+//     },
+//   };
+// }
 
 const Profile = ({ data }) => {
+  const [profile, setProfile] = useState({});
+
+  useEffect(() => {
+    const token = getCookies("token");
+    axios
+      .get(`${process.env.REACT_APP_URL_ROUTE}users/`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        console.log(res);
+        setProfile(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <>
       <div>
-        <Layouts />
+        <Layouts2 />
         <div>
           <div className="d-flex justify-content-center">
             <Image
@@ -29,21 +47,21 @@ const Profile = ({ data }) => {
                 borderColor: "gray",
                 backgroundColor: "gray",
               }}
-              src={Assets.pizza}
+              src={profile.photo}
               width="128"
               height="128"
               alt="{user.name}"
             />
           </div>
 
-          <h1 key={data.id} className="d-flex justify-content-center">
-            {data ? data[0].name : "data not found"}
-          </h1>
+          <h1 className="d-flex justify-content-center">{profile.name}</h1>
           <div className="py-5">
             <NavTabs />
           </div>
         </div>
-        <Footer />
+        <footer>
+          <Footer />
+        </footer>
       </div>
     </>
   );

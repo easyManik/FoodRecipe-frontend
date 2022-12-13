@@ -4,6 +4,7 @@ import cover from "./cover.png";
 import pizza from "./pizza.png";
 import rectangleYellow from "./regtangleYellow.png";
 import sayuran from "./sayuran.png";
+import UploadPhoto from "./UploadPhoto.png";
 
 const Assets = {
   bg,
@@ -12,5 +13,6 @@ const Assets = {
   pizza,
   rectangleYellow,
   sayuran,
+  UploadPhoto,
 };
 export default Assets;

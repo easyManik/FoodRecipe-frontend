@@ -1,7 +1,7 @@
-import React from "react";
 import Image from "next/image";
 import Assets from "../../../public";
-const css = { maxWidth: "500px", height: "auto" };
+
+const css = { maxWidth: "60%", height: "auto", minWidth: "30%" };
 
 const Page3 = () => {
   return (
@@ -16,23 +16,55 @@ const Page3 = () => {
         />
         <h1>Popular Recipe</h1>
       </div>
-      <div className="row gap-3 px-5  row-cols-3 d-flex justify-content-md-center">
-        <div
-          style={{
-            backgroundImage: `url(${Assets.pizza.src})`,
-            maxWidth: "500px",
-            height: "auto",
-          }}
-          className="d-flex align-items-end"
-        >
-          <p>satu</p>
+      <div className="row gap-3 row-cols-4 px-5 d-flex justify-content-center">
+        <div className="mx-0">
+          <Image src={Assets.pizza} alt="" style={css} />
+
+          <h4
+            style={{
+              marginTop: "-40px",
+              marginLeft: "13px",
+              color: "#3F3A3A",
+              maxWidth: "60%",
+              height: "auto",
+              minWidth: "20%",
+            }}
+          >
+            Pizza
+          </h4>
         </div>
-        <Image src={Assets.pizza} alt="satu" style={css} />
-        <Image src={Assets.pizza} alt="" style={css} />
-        <Image src={Assets.pizza} alt="" style={css} />
-        <Image src={Assets.pizza} alt="" style={css} />
-        <Image src={Assets.pizza} alt="" style={css} />
-        <Image src={Assets.pizza} alt="" style={css} />
+        <div className="mx-0">
+          <Image
+            src={Assets.pizza}
+            alt=""
+            style={{ maxWidth: "60%", height: "auto", minWidth: "20%" }}
+          />
+          <h4
+            style={{
+              marginTop: "-40px",
+              marginLeft: "13px",
+              color: "#3F3A3A",
+            }}
+          >
+            Pizza
+          </h4>
+        </div>
+        <div className="mx-0">
+          <Image
+            src={Assets.pizza}
+            alt=""
+            style={{ maxWidth: "60%", height: "auto", minWidth: "20%" }}
+          />
+          <h4
+            style={{
+              marginTop: "-40px",
+              marginLeft: "13px",
+              color: "#3F3A3A",
+            }}
+          >
+            Pizza
+          </h4>
+        </div>
       </div>
     </div>
   );

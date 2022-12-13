@@ -1,8 +1,72 @@
 import Image from "next/image";
+import React, { useState } from "react";
 import Assets from "../../../public";
 import style from "../../../styles/auth.module.css";
+import Message from "../../../components/ui/Message";
+import axios from "axios";
+import Swal from "sweetalert2";
+import Link from "next/link";
+import Router from "next/router";
 
-const registration = () => {
+const InfoWrapper = (props) => {
+  const { status } = props;
+
+  if (status !== null) {
+    if (status === false) {
+      return <Message type="error" text="Something Wrong" />;
+    }
+    return <Message type="succes" text="Register success, you can login now" />;
+  }
+  return <></>;
+};
+
+const Register = () => {
+  const [password, setPassword] = useState("");
+  const [isConfirm, setIsConfirm] = useState(true);
+  const [register, setRegister] = useState({
+    name: "",
+    email: "",
+    phonenumber: "",
+    password: "",
+  });
+  const handleChange = (e) => {
+    e.persist();
+    setRegister({
+      ...register,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handlePassword = (e) => {
+    e.persist();
+    setPassword(e.target.value);
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (password !== register.password) {
+        setIsConfirm(false);
+        Swal.fire("", err.response.data.message, "error");
+        return;
+      } else {
+        const res = await axios.post(
+          "http://localhost:3000/users/register",
+          register
+        );
+        console.log(res.data.data);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: res.data.message,
+          showConfirmButton: false,
+        });
+        Router.push("/ui/auth/login");
+      }
+    } catch (error) {
+      console.log(error);
+      // Swal.fire("", err.response.data.message, "error");
+    }
+  };
+
   return (
     <div className="align-self-stretch">
       <div className="row">
@@ -32,50 +96,74 @@ const registration = () => {
           <p className="d-flex justify-content-center">
             Create new account to access all features
           </p>
+          {/* <InfoWrapper status={isSuccess} /> */}
           <div className="container kotak_login mt-5 d-flex justify-content-center">
-            <form className="col">
+            <form className="col" onSubmit={handleSubmit}>
               <div className="form-group">
                 <label>Name</label>
                 <input
                   type="text"
+                  name="name"
                   className="form-control"
                   aria-describedby="emailHelp"
                   placeholder="Name"
+                  required
+                  value={register.name}
+                  onChange={handleChange}
                 />
               </div>
               <div className="form-group">
                 <label>Email</label>
                 <input
                   type="email"
+                  name="email"
                   className="form-control"
                   aria-describedby="emailHelp"
                   placeholder="Masukkan alamat email"
+                  required
+                  value={register.email}
+                  onChange={handleChange}
                 />
               </div>
               <div className="form-group">
                 <label>Phone Number</label>
                 <input
                   type="number"
+                  name="phonenumber"
                   className="form-control"
                   aria-describedby="emailHelp"
                   placeholder="08*********"
+                  required
+                  value={register.phonenumber}
+                  onChange={handleChange}
                 />
               </div>
               <div className="form-group mt-2">
                 <label>Create new password</label>
                 <input
                   type="password"
+                  name="password"
                   className="form-control"
                   placeholder="Create New Password"
+                  required
+                  value={register.password}
+                  onChange={handleChange}
                 />
               </div>
               <div className="form-group mt-2">
                 <label>New password</label>
                 <input
                   type="password"
+                  name="confirmpassword"
                   className="form-control"
                   placeholder="New Password"
+                  required
+                  // value={register.confirm}
+                  onChange={handlePassword}
                 />
+                {isConfirm === false && (
+                  <p style={{ color: "red" }}>Password wrong!</p>
+                )}
               </div>
 
               <div className="my-3 d-flex justify-content-start">
@@ -83,6 +171,7 @@ const registration = () => {
                 I agree to term & conditions
               </div>
               <button
+                title="Signup"
                 type="submit"
                 className="btn "
                 style={{ backgroundColor: "#EFC81A", color: "white" }}
@@ -92,12 +181,12 @@ const registration = () => {
             </form>
           </div>
           <div className="container mt-5 d-flex justify-content-center">
-            <div className="card-text d-flex">
-              Already have account?
-              <div to="/registerPekerja" style={{ color: "#EFC81A" }}>
-                Log in here
-              </div>
-            </div>
+            <p className="d-flex justify-content-center mt-3">
+              Already have an account ?
+              <Link href="/ui/auth/login">
+                <span style={{ color: "#EFC81A" }}>&nbsp;Login</span>
+              </Link>
+            </p>
           </div>
         </div>
       </div>
@@ -105,4 +194,4 @@ const registration = () => {
   );
 };
 
-export default registration;
+export default Register;
