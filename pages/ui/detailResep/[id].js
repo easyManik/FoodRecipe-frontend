@@ -6,6 +6,9 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import ReactPlayer from "react-player";
 import { getCookies } from "cookies-next";
+import Assets from "../../../public";
+import Link from "next/link";
+import Swal from "sweetalert2";
 
 const css = { maxWidth: "100%", height: "auto", maxHeight: "500px" };
 const buttonstyle = {
@@ -17,53 +20,117 @@ const buttonstyle = {
   color: "white",
 };
 
-const Detail = () => {
+const Detail = ({ isLogin, token }) => {
   const router = useRouter();
   const { id } = router.query;
-  const [dataDetail, setDataDetail] = useState();
-  const fetchDetail = async (id) => {
-    const token = getCookies("token");
+  console.log("id detail recep=", id);
+  const [data, setData] = useState();
+
+  const fetchdata = async (id) => {
     const result = await axios.get(
-      `${process.env.REACT_APP_URL_ROUTE}recipes/detail/${id}`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
+      process.env.NEXT_PUBLIC_BACKEND_API + `/recipes/${id}`
+      // `http://localhost:3000/recipes/`
     );
-    console.log(result);
     const data = result.data.data[0];
-    setDataDetail(data);
-    console.log(data);
+    setData(data);
+    console.log("data=", data);
   };
   useEffect(() => {
-    fetchDetail(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    fetchdata(id);
   }, []);
+
+  //handle save recipe
+  const fetchSaved = async (id) => {
+    try {
+      console.log("id recipes saved", id);
+      const param = { id_recipe: `${id}` };
+
+      await axios.post(
+        process.env.NEXT_PUBLIC_BACKEND_API + `/recipes/saved`,
+        param,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      Swal.fire("success", "berhasil simpan recipe", "success");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const fetchLiked = async (id_recipe) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const param = { id_recipe: `${id_recipe}` };
+      console.log("id liked", param);
+
+      await axios.post(
+        process.env.NEXT_PUBLIC_BACKEND_API + `/recipes/liked`,
+        param,
+        config
+      );
+      Swal.fire("success", "berhasil simpan recipe", "success");
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <div>
-      <Layouts2 />
+      <Layouts2 isLogin={isLogin} />
       <div className="container py-5">
         <div className="d-flex align-items-center flex-column">
-          <h1 style={{ color: "#2E266F" }}>Loream Sandwich</h1>
-          <Image
+          <h1 style={{ color: "#2E266F" }}>
+            {data?.title ? data.title : "No Title"}
+          </h1>
+          <img
             className="pt-5 col-sm-5"
-            src={dataDetail ? dataDetail.image : "/pizza.png"}
+            src={data?.image ? data.image : "/pizza.png"}
             width="600"
             height="400"
             alt="image"
             style={css}
           />
         </div>
+        <button
+          className="btn"
+          onClick={() => router.push("/ui/detailResep/edit/" + data?.id)}
+        >
+          <Image src={Assets.edit} alt="edit" width={30} height={30} />
+        </button>
+        <button className="btn" onClick={() => fetchLiked(data.id)}>
+          <Image src={Assets.liked} alt="liked" width={30} height={30} />
+        </button>
+        <button className="btn" onClick={() => fetchSaved(data.id)}>
+          <Image src={Assets.saved} alt="saved" width={30} height={30} />
+        </button>
 
         <div className="py-5">
           <h1>Ingredients</h1>
-          <p>{dataDetail ? dataDetail.ingredients : " Ingredient"}</p>
+          <p>
+            {data?.ingredient ? data.ingredient : "...."}
+            {data?.ingredient
+              ? data.ingredient.map((item) => <p key={item}>{item}</p>)
+              : "No Ingredient"}{" "}
+          </p>
         </div>
         <div className="py-3 video-step">
           <h1>Video Step</h1>
-          <div className="py-3 d-flex flex-column">
-            <ReactPlayer url={dataDetail && dataDetail.video} controls={true} />
-          </div>
+          {data?.video ? (
+            <video width="100%" controls height={700}>
+              <source src={data?.video} type="video/mp4" />
+              Your browser does not support HTML video.
+            </video>
+          ) : (
+            <h1>Loading Video...</h1>
+          )}
         </div>
         <form className="py-5 flex-column">
           <textarea
@@ -102,5 +169,23 @@ const Detail = () => {
       <Footer />
     </div>
   );
+};
+export const getServerSideProps = async (context) => {
+  const { token } = context.req.cookies;
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/ui/auth/login",
+        permanent: true,
+      },
+    };
+  }
+
+  return {
+    props: {
+      isLogin: true,
+      token: token,
+    },
+  };
 };
 export default Detail;

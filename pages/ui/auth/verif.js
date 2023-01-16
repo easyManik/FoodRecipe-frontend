@@ -27,7 +27,7 @@ const Login = () => {
 
   const [auth, setAuth] = useState({
     email: "",
-    password: "",
+    otp: "",
   });
 
   const handleSubmit = async (e) => {
@@ -37,7 +37,7 @@ const Login = () => {
         withCredentials: true,
       };
       const result = await axios.post(
-        "http://localhost:3000/users/login",
+        "http://localhost:3000/users/verif",
         auth,
         config
       );
@@ -49,8 +49,8 @@ const Login = () => {
           "error"
         );
         //router push
-      } else if (result.data.message === "wrong password") {
-        Swal.fire("Warning", "Wrong Password", "error");
+      } else if (result.data.message === "wrong otp") {
+        Swal.fire("Warning", "Wrong otp", "error");
       } else {
         const token = result.data.token;
         const data = {
@@ -66,18 +66,13 @@ const Login = () => {
         });
         const checkJwt = await cookie.json();
         if (!checkJwt) {
-          return Swal.fire("Warning", "fail to login", "err");
+          return Swal.fire("Warning", "fail to verification account", "error");
         }
-        Swal.fire("Success", "login success", "success");
-        router.push("/search");
+        Swal.fire("Success", "verification account success", "success");
+        router.push("/ui/auth/login");
       }
     } catch (e) {
       console.log(e);
-      Swal.fire({
-        title: "Good job!",
-        text: `${e.response.data.message}`,
-        icon: "error",
-      });
     }
   };
   const handleChange = (e) => {
@@ -133,24 +128,18 @@ const Login = () => {
                   />
                 </div>
                 <div className="form-group mt-2">
-                  <label>Kata Sandi</label>
+                  <label>Otp</label>
                   <input
-                    type="password"
-                    name="password"
+                    type="number"
+                    name="otp"
                     className="form-control"
-                    placeholder="Masukkan kata sandi"
-                    value={auth.password}
+                    placeholder="Masukkan otp"
+                    value={auth.otp}
                     required
                     onChange={handleChange}
                   />
                 </div>
-                <div className="my-3 d-flex justify-content-start">
-                  <input
-                    type="checkbox"
-                    style={{ backgroundColor: "#EFC81A" }}
-                  />
-                  I agree to term & conditions
-                </div>
+
                 <div className="my-3  d-flex justify-content-center">
                   <button
                     type="submit"
@@ -161,10 +150,6 @@ const Login = () => {
                     Masuk
                   </button>
                 </div>
-
-                <Link href="" className="my-3 d-flex justify-content-end">
-                  Forget Password?
-                </Link>
               </form>
             </div>
             <div className="container mt-5 d-flex justify-content-center">

@@ -59,11 +59,16 @@ const Register = () => {
           title: res.data.message,
           showConfirmButton: false,
         });
-        Router.push("/ui/auth/login");
+        Router.push("/ui/auth/verif");
       }
     } catch (error) {
       console.log(error);
-      // Swal.fire("", err.response.data.message, "error");
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: error.response.data.message,
+        showConfirmButton: false,
+      });
     }
   };
 
@@ -76,7 +81,7 @@ const Register = () => {
               backgroundImage: `url(${Assets.bg.src})`,
               backgroundColor: "#EFC81A",
               width: "100%",
-              height: "100%",
+              height: "100vh",
             }}
           >
             <div
@@ -170,14 +175,16 @@ const Register = () => {
                 <input type="checkbox" style={{ backgroundColor: "#EFC81A" }} />
                 I agree to term & conditions
               </div>
-              <button
-                title="Signup"
-                type="submit"
-                className="btn "
-                style={{ backgroundColor: "#EFC81A", color: "white" }}
-              >
-                Register Account
-              </button>
+              <div className="my-3 d-flex justify-content-center">
+                <button
+                  title="Signup"
+                  type="submit"
+                  className="btn px-5"
+                  style={{ backgroundColor: "#EFC81A", color: "white" }}
+                >
+                  Register Account
+                </button>
+              </div>
             </form>
           </div>
           <div className="container mt-5 d-flex justify-content-center">

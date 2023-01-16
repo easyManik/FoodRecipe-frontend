@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { Footer } from "../../../components/footer";
-import { Layouts2 } from "../../../components/layouts/Layout2";
-import Assets from "../../../public";
-import Page1 from "./page1";
-import Page2 from "./page2";
-import Page3 from "./Page3";
+import { Footer } from "../components/footer";
+import { Layouts2 } from "../components/layouts/Layout2";
+import Assets from "../public";
+import Page1 from "./ui/landingPage/page1";
+import Page2 from "./ui/landingPage/page2";
+import Page3 from "./ui/landingPage/page3";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
-import styles from "../../../styles/landing.module.css";
-import RecipeCard from "../../../components/layouts/RecipeCard";
-import Sorter from "../../../components/module/sorter";
-import Pagination from "../../../components/module/Pagination/Pagination";
-import CardHome from "../../../components/module/cardLandingPage";
+import styles from "../styles/landing.module.css";
+import RecipeCard from "../components/layouts/RecipeCard";
+import Sorter from "../components/module/sorter";
+import Pagination from "../components/module/Pagination/Pagination";
+import CardHome from "../components/module/cardLandingPage";
 
 const css = { maxWidth: "100%", height: "50vw" };
 
@@ -25,7 +25,7 @@ const LandingPage = ({ data, isLogin, pagination }) => {
     e.preventDefault();
     if (!search) {
       return router.push({
-        pathname: "/index.js",
+        pathname: "/search",
         query: {
           search: search,
         },
@@ -33,7 +33,7 @@ const LandingPage = ({ data, isLogin, pagination }) => {
     }
     console.log("handlesearch");
     router.push({
-      pathname: "/index.js",
+      pathname: "/search",
       hash: "recipes",
       query: {
         search: search,
@@ -89,18 +89,48 @@ const LandingPage = ({ data, isLogin, pagination }) => {
           </div>
         </section>
 
+        {/* <section className="mb-5">
+          <div className={`${styles.titleSection}  mb-4 mb-md-5`}>
+            <h1>Search Result</h1>
+          </div>
+          <div className="row">
+            {recipes.length >= 1 &&
+              recipes.map((item) => {
+                return (
+                  <RecipeCard
+                    key={item.id}
+                    photo={item.image}
+                    title={item.title}
+                    // type='edit'
+                    path={() => router.push(`/recipe/${item.id}`)}
+                  />
+                );
+              })}
+          </div>
+        </section> */}
         <main className={styles.main} id="recipes">
-          <h1>
-            Recently Recipe <Sorter />
-          </h1>
+          <div className="d-flex p-3 align-items-center ">
+            <Image
+              className="mx-4"
+              src={Assets.rectangleYellow}
+              alt=""
+              width={25}
+              height={140}
+            />
+            <h1>Popular For You !</h1>
+            <div className=" ">
+              <Sorter />
+            </div>
+          </div>
+
           <div className={styles.container}>
             {data?.length > 0 ? (
               data.map((recipe) => (
                 <CardHome
-                  key={recipe.id}
-                  title={recipe.title}
-                  id={recipe.id}
-                  image={recipe.image}
+                  key={recipe?.id}
+                  title={recipe?.title}
+                  id={recipe?.id}
+                  image={recipe?.image}
                 />
               ))
             ) : (
@@ -120,9 +150,9 @@ const LandingPage = ({ data, isLogin, pagination }) => {
         <div className="py-5">
           <Page2 />
         </div>
-        <div className="py-5">
+        {/* <div className="py-5">
           <Page3 />
-        </div>
+        </div> */}
         <footer>
           <Footer />
         </footer>

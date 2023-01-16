@@ -1,21 +1,36 @@
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import { Footer } from "../../../components/footer";
-import { Layouts2 } from "../../../components/layouts/Layout2";
-import Assets from "../../../public";
-import style from "../../../styles/AddRecipe.module.css";
+import React, { useEffect, useState } from "react";
+import style from "../../../../styles/recipes.module.css";
 import axios from "axios";
-import { getCookies } from "cookies-next";
-import Swal from "sweetalert2";
 import { useRouter } from "next/router";
+import { Footer } from "../../../../components/footer";
+import Assets from "../../../../public";
+import { Layouts2 } from "../../../../components/layouts/Layout2";
+import Swal from "sweetalert2";
+import Image from "next/image";
 
-const AddRecipe = ({ isLogin, token }) => {
-  const router = useRouter();
+const Edit = ({ isLogin, token }) => {
   const [uploading, setUploading] = useState(false);
   const [image, setImage] = useState({});
   const [title, setTitle] = useState("");
   const [ingredient, setIngredient] = useState("");
-  const [video, setVideo] = useState([]);
+  const [video, setVideo] = useState({});
+  const [data, setData] = useState();
+
+  const router = useRouter();
+  const { id } = router.query;
+  console.log("id edit recipe", id);
+  const fetchdata = async (id) => {
+    const result = await axios.get(
+      // process.env.NEXT_PUBLIC_BACKEND_API + `/recipes/`
+      `http://localhost:3000/recipes/${id}`
+    );
+    const data = result.data.data[0];
+    setData(data);
+    console.log("data=", data);
+  };
+  useEffect(() => {
+    fetchdata(id);
+  }, []);
 
   const handleImage = (e) => {
     setImage({
@@ -34,41 +49,38 @@ const AddRecipe = ({ isLogin, token }) => {
   const handleAdd = async () => {
     try {
       setUploading(true);
-      const data = new FormData();
-      data.append("title", title);
-      data.append("image", image.file);
-      data.append("ingredient", ingredient);
-      data.append("video", video.file);
+      const dataUpdate = new FormData();
+      dataUpdate.append("title", title);
+      dataUpdate.append("image", image.file);
+      dataUpdate.append("ingredient", ingredient);
+      dataUpdate.append("video", video.file);
       const config = {
         headers: {
           "content-type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
-        // withCredentials : true
       };
-      const result = await axios.post(
-        process.env.NEXT_PUBLIC_BACKEND_API + "/recipes/add",
-        data,
+      await axios.put(
+        `http://localhost:3000/recipes/${id}`,
+        dataUpdate,
         config
       );
-      setUploading(false);
-      console.log("data add", data);
-      console.log("data add status", result.data.message);
 
-      Swal.fire("Good Job", "Add New Recipe Success", "success");
+      setUploading(false);
+      console.log("data update", dataUpdate);
+      Swal.fire("Good Job", "Edit Recipe Success", "success");
       router.push("/search");
     } catch (error) {
-      Swal.fire("Failed", "Add Recipes Fails", "error");
       console.log(error);
     }
   };
-
   return (
-    <div>
-      <header>
-        <Layouts2 isLogin={isLogin} />
-      </header>
-      <main>
+    <>
+      <Layouts2 isLogin={isLogin} />
+      <main className={style.main}>
+        <h3 style={{ margin: "20px auto" }}>
+          {data?.title ? data.title : "Edit Recipes"}
+        </h3>
         <form className="py-5 container flex-column justify-content-md-center">
           <div className="flex-column pb-4">
             <div className={style.dropzone_wrapper}>
@@ -76,21 +88,21 @@ const AddRecipe = ({ isLogin, token }) => {
                 <i className="glyphicon glyphicon-download-alt"></i>
 
                 {image.preview ? (
-                  <img src={image.preview} alt="-" width="100" height="40" />
+                  <Image src={image.preview} alt="-" width="100" height="40" />
                 ) : (
-                  <Image
-                    src={Assets.UploadPhoto}
+                  <img
+                    src={data?.image ? data.image : "..."}
                     alt=",,,"
                     width="70"
                     height="40"
                   />
                 )}
-                <p>Add photo</p>
+                <p>Add photo </p>
               </div>
 
               <input
                 type="file"
-                id="image"
+                id=" "
                 name="image"
                 className={style.dropzone}
                 onChange={handleImage}
@@ -103,7 +115,7 @@ const AddRecipe = ({ isLogin, token }) => {
                 type="text"
                 className="form-control"
                 name="title"
-                placeholder="name_recipe"
+                placeholder={data?.title ? data.title : "...."}
                 required
                 onChange={(e) => setTitle(e.target.value)}
                 style={{ backgroundColor: "#F6F5F4" }}
@@ -112,10 +124,10 @@ const AddRecipe = ({ isLogin, token }) => {
             <div className="pb-4">
               <textarea
                 className="form-control"
-                id="exampleFormControlTextarea1"
+                id=" "
                 name="ingredient"
                 rows="10"
-                placeholder="Ingredient"
+                placeholder={data?.ingredient ? data.ingredient : "...."}
                 required
                 onChange={(e) => setIngredient(e.target.value)}
                 style={{ backgroundColor: "#F6F5F4" }}
@@ -124,11 +136,12 @@ const AddRecipe = ({ isLogin, token }) => {
             <div className={style.video_wrapper}>
               <div className={style.video_desc}>
                 <i className="glyphicon glyphicon-download-alt"></i>
+
                 {video.preview ? (
-                  <img src={video.preview} alt="-" width="100" height="40" />
+                  <Image src={video.preview} alt="-" width="100" height="40" />
                 ) : (
-                  <Image
-                    src={Assets.UploadPhoto}
+                  <img
+                    src={data?.video ? data.video : "..."}
                     alt=",,,"
                     width="70"
                     height="40"
@@ -151,7 +164,6 @@ const AddRecipe = ({ isLogin, token }) => {
           <div className="d-flex justify-content-center pb-5">
             <button
               onClick={handleAdd}
-              // title=
               style={{
                 backgroundColor: "#EFC81A",
                 borderRadius: "10px",
@@ -160,18 +172,16 @@ const AddRecipe = ({ isLogin, token }) => {
                 color: "white",
               }}
             >
-              {uploading ? "Uploading..." : "Post"}
+              {uploading ? "Uploading..." : "Update"}
             </button>
           </div>
         </form>
       </main>
-
-      <footer className="align-self-end">
-        <Footer />
-      </footer>
-    </div>
+      <Footer />
+    </>
   );
 };
+
 export const getServerSideProps = async (context) => {
   const { token } = context.req.cookies;
 
@@ -191,4 +201,5 @@ export const getServerSideProps = async (context) => {
     },
   };
 };
-export default AddRecipe;
+
+export default Edit;
