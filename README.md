@@ -1,34 +1,86 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">
 
-## Getting Started
+  <h3 align="center">Food Recipes</h3>
+  <p align="center">
+    <image align="center" width="100" src='./public/logo.png' />
+  </p>
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
+## ✏️ About
+
+Food Recipe is a web-based application that is used to share recipes and get recipes to cook the dishes you want. Through this application, users can share the recipes they want, complete with video tutorials for making dishes, descriptions of ingredients and descriptions of recipes.
+
+## 🔖Build With
+
+- [Next Js](https://nextjs.org)
+- [Axios](https://www.npmjs.com/package/axios)
+- [Bootstrap](https://www.npmjs.com/package/bootstrap)
+- [Sweetalert](https://www.npmjs.com/package/sweetalert)
+
+## 💻 How To Install?
+
+- Clone This Repo
+
+```
+git clone https://github.com/easyManik/FoodRecipe-frontend.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Go To Folder Repo
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```
+cd FE-Food-Recipes
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- Install Module
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```
+npm install
+```
 
-## Learn More
+- Type ` npm run dev` To Start Website
 
-To learn more about Next.js, take a look at the following resources:
+## Screenshot
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Login Page                                                | Register Page                                             |
+| --------------------------------------------------------- | --------------------------------------------------------- |
+| ![Login](/public/readme/login.jpeg?raw=true "Login Page") | ![Register](/public/readme/register.jpeg "Register Page") |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+| Home Page                                        | Search Page                                                                  |
+| ------------------------------------------------ | ---------------------------------------------------------------------------- |
+| ![Home](/public/readme/home.jpeg "Landing Page") | ![Search Page, Sorting Page](/public/readme/home2.jpeg "Recipe Detail Page") |
 
-## Deploy on Vercel
+| Home Page                                      | Home Page                                      |
+| ---------------------------------------------- | ---------------------------------------------- |
+| ![Home](/public/readme/home3.jpeg "Home Page") | ![Home](/public/readme/home4.jpeg "Home Page") |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Profile Page                                           | Add Recipe Page                                                |
+| ------------------------------------------------------ | -------------------------------------------------------------- |
+| ![Profile](/public/readme/profile.jpeg "Profile Page") | ![Add Recipe](/public/readme/addRecipe.jpeg "Add Recipe Page") |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+| Detail Recipe                                                      | Detail Recipe video                                                             |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
+| ![Detail Recipe](/public/readme/detailRecipe.jpeg "Detail Recipe") | ![Detail Recipe video](/public/readme/detailRecipe2.jpeg "Detail Recipe Video") |
+
+| Detail Recipe comment                                                       |
+| --------------------------------------------------------------------------- |
+| ![Detail Recipe comment](/public/readme/detailRecipe3.jpeg "Detail Recipe") |
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## ✍️ Authors
+
+- [@easyManik](https://github.com/easyManik)
+
+## Link
+
+- [Backend](https://github.com/easyManik/restApi-FoodrecipeApp.git)
+- [Visit Project]()

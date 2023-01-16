@@ -69,20 +69,18 @@ export const Layouts2 = ({ isLogin, profile }) => {
             </div>
           ) : (
             <div className="py-3 col-sm-4 d-flex justify-content-center">
-              <Link
-                href="/ui/profile/Profile"
-                style={{
-                  backgroundColor: "gray",
-                  borderRadius: "100%",
-                  borderColor: "gray",
-                }}
-              >
-                <img
+              <Link href="/ui/profile/Profile">
+                <Image
                   className="d-flex align-items-center"
-                  src={profile}
+                  src={Assets.profile}
                   width="55"
                   height="55"
                   alt="photo"
+                  style={{
+                    backgroundColor: "gray",
+                    borderRadius: "100%",
+                    borderColor: "gray",
+                  }}
                 />
               </Link>
               <p

@@ -9,9 +9,11 @@ import edit from "./edit.png";
 import saved from "./saved.png";
 import liked from "./liked.png";
 import hapus from "./delete.png";
+import profile from "./profile.jpeg";
 
 const Assets = {
   bg,
+  profile,
   hapus,
   saved,
   liked,

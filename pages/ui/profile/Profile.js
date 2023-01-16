@@ -177,7 +177,7 @@ const Profile = ({ isLogin, token }) => {
           >
             <div>
               <Image
-                src="/asset/img/profile.png"
+                src={Assets.profile}
                 alt=""
                 width={150}
                 height={150}
