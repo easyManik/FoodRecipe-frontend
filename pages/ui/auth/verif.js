@@ -37,7 +37,7 @@ const Login = () => {
         withCredentials: true,
       };
       const result = await axios.post(
-        "http://localhost:3000/users/verif",
+        process.env.NEXT_PUBLIC_BACKEND_API + `users/verif`,
         auth,
         config
       );

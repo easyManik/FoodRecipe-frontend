@@ -49,7 +49,7 @@ const Register = () => {
         return;
       } else {
         const res = await axios.post(
-          "http://localhost:3000/users/register",
+          process.env.NEXT_PUBLIC_BACKEND_API + `users/register`,
           register
         );
         console.log(res.data.data);
@@ -66,7 +66,7 @@ const Register = () => {
       Swal.fire({
         position: "center",
         icon: "error",
-        title: error.response.data.message,
+        title: "error.response.data.message",
         showConfirmButton: false,
       });
     }

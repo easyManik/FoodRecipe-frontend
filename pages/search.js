@@ -5,12 +5,8 @@ import { Layouts2 } from "../components/layouts/Layout2";
 import Assets from "../public";
 import Page1 from "./ui/landingPage/page1";
 import Page2 from "./ui/landingPage/page2";
-import Page3 from "./ui/landingPage/page3";
-import axios from "axios";
 import { useRouter } from "next/router";
-import Swal from "sweetalert2";
 import styles from "../styles/landing.module.css";
-import RecipeCard from "../components/layouts/RecipeCard";
 import Sorter from "../components/module/sorter";
 import Pagination from "../components/module/Pagination/Pagination";
 import CardHome from "../components/module/cardLandingPage";
@@ -167,7 +163,7 @@ export const getServerSideProps = async (context) => {
   const sort = context.query.sort || "asc";
   const data = await fetch(
     process.env.NEXT_PUBLIC_BACKEND_API +
-      `/recipes?page=${page}&sortby=${sortby}&sort=${sort}&search=${search}`
+      `recipes?page=${page}&sortby=${sortby}&sort=${sort}&search=${search}`
   );
   const result = await data.json();
   const { token } = context.req.cookies;

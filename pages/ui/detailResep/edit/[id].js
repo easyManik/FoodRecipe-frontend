@@ -22,7 +22,7 @@ const Edit = ({ isLogin, token }) => {
   const fetchdata = async (id) => {
     const result = await axios.get(
       // process.env.NEXT_PUBLIC_BACKEND_API + `/recipes/`
-      `http://localhost:3000/recipes/${id}`
+      process.env.NEXT_PUBLIC_BACKEND_API + `recipes/${id}`
     );
     const data = result.data.data[0];
     setData(data);
@@ -61,7 +61,7 @@ const Edit = ({ isLogin, token }) => {
         },
       };
       await axios.put(
-        `http://localhost:3000/recipes/${id}`,
+        process.env.NEXT_PUBLIC_BACKEND_API + `recipes/${id}`,
         dataUpdate,
         config
       );

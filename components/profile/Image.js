@@ -29,9 +29,14 @@ const PhotoProfile = ({ token, onClick }) => {
     formData.append("photo", photo);
     console.log(formData, "data dari handle data update");
     axios
-      .put(`http://localhost:3000/users/edit`, formData, tokenUser, {
-        "content-type": "multipart/form-data",
-      })
+      .put(
+        process.env.NEXT_PUBLIC_BACKEND_API + `users/edit`,
+        formData,
+        tokenUser,
+        {
+          "content-type": "multipart/form-data",
+        }
+      )
       .then((res) => {
         console.log("Update photo succes");
         console.log(res);
