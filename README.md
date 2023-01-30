@@ -29,7 +29,7 @@ git clone https://github.com/easyManik/FoodRecipe-frontend.git
 - Go To Folder Repo
 
 ```
-cd FE-Food-Recipes
+cd FoodRecipe-frontend
 ```
 
 - Install Module
