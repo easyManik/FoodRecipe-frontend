@@ -1,3 +1,3 @@
-// import React from "react";
+import React from "react";
 const StoreContext = React.createContext();
 export { StoreContext };
