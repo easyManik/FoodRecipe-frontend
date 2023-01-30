@@ -28,7 +28,7 @@ const Detail = ({ isLogin, token }) => {
 
   const fetchdata = async (id) => {
     const result = await axios.get(
-      process.env.NEXT_PUBLIC_BACKEND_API + `/recipes/${id}`
+      process.env.NEXT_PUBLIC_BACKEND_API + `recipes/${id}`
       // `http://localhost:3000/recipes/`
     );
     const data = result.data.data[0];
@@ -46,7 +46,7 @@ const Detail = ({ isLogin, token }) => {
       const param = { id_recipe: `${id}` };
 
       await axios.post(
-        process.env.NEXT_PUBLIC_BACKEND_API + `/recipes/saved`,
+        process.env.NEXT_PUBLIC_BACKEND_API + `recipes/saved`,
         param,
         {
           headers: {
@@ -72,7 +72,7 @@ const Detail = ({ isLogin, token }) => {
       console.log("id liked", param);
 
       await axios.post(
-        process.env.NEXT_PUBLIC_BACKEND_API + `/recipes/liked`,
+        process.env.NEXT_PUBLIC_BACKEND_API + `recipes/liked`,
         param,
         config
       );

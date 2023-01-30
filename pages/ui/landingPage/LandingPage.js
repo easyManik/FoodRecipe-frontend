@@ -137,7 +137,7 @@ export const getServerSideProps = async (context) => {
   const sort = context.query.sort || "asc";
   const data = await fetch(
     process.env.NEXT_PUBLIC_BACKEND_API +
-      `/recipes?page=${page}&sortby=${sortby}&sort=${sort}&search=${search}`
+      `recipes?page=${page}&sortby=${sortby}&sort=${sort}&search=${search}`
   );
   const result = await data.json();
   const { token } = context.req.cookies;

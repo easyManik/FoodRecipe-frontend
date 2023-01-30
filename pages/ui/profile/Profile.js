@@ -29,7 +29,7 @@ const Profile = ({ isLogin, token }) => {
         headers: { Authorization: `Bearer ${token}` },
       };
       const result = await axios.get(
-        process.env.NEXT_PUBLIC_BACKEND_API + "/users/profile",
+        process.env.NEXT_PUBLIC_BACKEND_API + "users/profile",
         {
           ...config,
         }
@@ -46,7 +46,7 @@ const Profile = ({ isLogin, token }) => {
         headers: { Authorization: `Bearer ${token}` },
       };
       const result = await axios.get(
-        process.env.NEXT_PUBLIC_BACKEND_API + "/profile/recipes",
+        process.env.NEXT_PUBLIC_BACKEND_API + "profile/recipes",
         {
           // withCredentials : true,
           ...config,
@@ -65,7 +65,7 @@ const Profile = ({ isLogin, token }) => {
         headers: { Authorization: `Bearer ${token}` },
       };
       const result = await axios.get(
-        process.env.NEXT_PUBLIC_BACKEND_API + "/recipes/?saved/",
+        process.env.NEXT_PUBLIC_BACKEND_API + "recipes/?saved/",
         {
           // withCredentials : true,
           ...config,
@@ -85,7 +85,7 @@ const Profile = ({ isLogin, token }) => {
         headers: { Authorization: `Bearer ${token}` },
       };
       const result = await axios.get(
-        process.env.NEXT_PUBLIC_BACKEND_API + "/recipes/?liked",
+        process.env.NEXT_PUBLIC_BACKEND_API + "recipes/?liked",
         {
           // withCredentials : true,
           ...config,
@@ -113,7 +113,7 @@ const Profile = ({ isLogin, token }) => {
     try {
       console.log(id);
       const result = await axios.delete(
-        process.env.NEXT_PUBLIC_BACKEND_API + `/recipes/${id}`,
+        process.env.NEXT_PUBLIC_BACKEND_API + `recipes/${id}`,
         {
           headers: {
             ...config,
@@ -135,7 +135,7 @@ const Profile = ({ isLogin, token }) => {
     try {
       console.log(id);
       const result = await axios.delete(
-        process.env.NEXT_PUBLIC_BACKEND_API + `/recipes/?saved/${id}`
+        process.env.NEXT_PUBLIC_BACKEND_API + `recipes/?saved/${id}`
       );
       Swal.fire("Good Job", "Delete Success", "success");
       router.push((e) => e.preventDefault);
@@ -152,7 +152,7 @@ const Profile = ({ isLogin, token }) => {
     try {
       console.log(id);
       const result = await axios.delete(
-        process.env.NEXT_PUBLIC_BACKEND_API + `/recipes/?liked/${id}`
+        process.env.NEXT_PUBLIC_BACKEND_API + `recipes/?liked/${id}`
       );
       Swal.fire("Good Job", "Delete Success", "success");
       router.push((e) => e.preventDefault);

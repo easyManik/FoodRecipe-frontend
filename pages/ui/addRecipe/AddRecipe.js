@@ -47,7 +47,7 @@ const AddRecipe = ({ isLogin, token }) => {
         // withCredentials : true
       };
       const result = await axios.post(
-        process.env.NEXT_PUBLIC_BACKEND_API + "/recipes/add",
+        process.env.NEXT_PUBLIC_BACKEND_API + "recipes/add",
         data,
         config
       );

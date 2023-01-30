@@ -5,7 +5,7 @@ export default function login(req, res) {
     const token = req.body.token;
     res.setHeader(
       "Set-Cookie",
-      `tokenHalo=${token}; Path=/ ; httpOnly ; Max-Age : 9000000000; Secure ; SameSite=None`
+      `token=${token}; Path=/ ; httpOnly ; Max-Age : 9000000000; Secure ; SameSite=None`
     );
     res.send({
       logout: false,
