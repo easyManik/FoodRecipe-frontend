@@ -76,7 +76,7 @@ const AddRecipe = ({ isLogin, token }) => {
                 <i className="glyphicon glyphicon-download-alt"></i>
 
                 {image.preview ? (
-                  <img src={image.preview} alt="-" width="100" height="40" />
+                  <img src={image.preview} alt="prev" width={100} height={40} />
                 ) : (
                   <Image
                     src={Assets.UploadPhoto}
